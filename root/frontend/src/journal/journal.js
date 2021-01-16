@@ -1,6 +1,7 @@
 import React from "react";
 import "./journal.css";
 import Button from "react-bootstrap/Button";
+import CreateJournal from "../create-journal/create-journal";
 
 function Journal() {
   return (
@@ -11,9 +12,7 @@ function Journal() {
       <div className="page-padding">
         <div>What would you like to do?</div>
         <br />
-        <Button variant="info" className="button-spacing">
-          Create a new journal entry!
-        </Button>
+        <CreateJournal />
         <Button variant="info">Open a previous journal entry!</Button>
       </div>
     </div>
