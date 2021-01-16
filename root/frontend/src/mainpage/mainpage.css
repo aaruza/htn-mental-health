@@ -1,0 +1,23 @@
+.Mainpage {
+    margin: 0;
+    text-align: center;
+}
+
+.Mainpage-title-div {
+    /* background-image: url('./resources/titlebg.jpg');
+    background-repeat: no-repeat;
+    background-size: contain; */
+    width:100%;
+    height: auto;
+    /* height:0;
+    padding-top: 52.5% */
+}
+
+/* img to be the background is set to the maximum width */
+.Mainpage-bg-img {
+    position: absolute;
+    width:100%;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
