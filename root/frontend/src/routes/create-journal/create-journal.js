@@ -8,11 +8,22 @@ import FormControl from "react-bootstrap/FormControl";
 
 function CreateJournal() {
   const [show, setShow] = useState(false);
-  const [data, setData] = useState(false)
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
 
   const save = () => {
+    addEntry('hi@gmail.com', title, text)
     close()
   }
+
+  const updateTitle = (e) => {
+    setTitle(e.target.value)
+  }
+
+  const updateText = (e) => {
+    setText(e.target.value)
+  }
+
   const close = () => setShow(false);
   const open = () => setShow(true);
 
@@ -22,7 +33,6 @@ function CreateJournal() {
       <Button className="button-spacing" variant="info" onClick={open}>
         Create a new journal entry!
       </Button>
-      {JSON.stringify(data)}
       <Modal
         show={show}
         onHide={close}
@@ -37,6 +47,7 @@ function CreateJournal() {
         <Modal.Body>
           <InputGroup>
             <FormControl
+              onChange={updateTitle}
               placeholder="Journal Entry Title"
               aria-label="Journal entry title input field"
             />
@@ -44,6 +55,7 @@ function CreateJournal() {
           <br />
           <InputGroup>
             <FormControl
+              onChange={updateText}
               as="textarea"
               rows={20}
               placeholder="Start your journal entry here!"

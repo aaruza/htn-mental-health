@@ -83,7 +83,7 @@ def journal_entries():
             temp = session.query(JournalEntry).all()
             values.extend([obj.to_dict() for obj in temp])
         run_transaction(sessionmaker, callback)
-        return {"hi": 'HI'}
+        return {"values": values}
     else:
         def callback(session):
             entry = JournalEntry(request.get_json()['email'], request.get_json()['title'], request.get_json()['text'])
