@@ -35,7 +35,7 @@ export const signup = (email, firstname, lastname, password) =>{
 }
 
 
-export const getEntries = (setData) => {
+export const getEntries = (dashboard) => {
     const url = "/api/journal"
     const request = new Request(url, {
         method: "GET",  
@@ -47,7 +47,7 @@ export const getEntries = (setData) => {
     fetch(request).then(res => {
         return res.json()
     }).then(json => {
-        setData(json)
+        dashboard.setState({data: json.values})
     }).catch(error => {
         console.log(error)
     })
