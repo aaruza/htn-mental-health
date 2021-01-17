@@ -19,7 +19,7 @@ input {
 
 .Popup-Content {
     width: 20vw;
-    height: 40vh;
+    height: auto;
     background-color: rgb(155, 214, 216);
     border-radius: 10px;
     justify-content: left;

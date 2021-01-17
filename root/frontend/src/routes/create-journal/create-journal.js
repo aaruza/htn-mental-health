@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./create-journal.css";
-import {addEntry, getEntries} from '../actions/account'
+import {addEntry, getEntries} from '../../actions/account'
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
