@@ -27,6 +27,7 @@ export const signup = (email, firstname, lastname, password) =>{
         }
     })
     fetch(request).then(res => {
+
         return res.json()
     }).catch(error => {
         console.log(error)
@@ -34,11 +35,10 @@ export const signup = (email, firstname, lastname, password) =>{
 }
 
 
-export const getEntries = (email) => {
+export const getEntries = (setData) => {
     const url = "/api/journal"
     const request = new Request(url, {
-        method: "GET",
-        body: JSON.stringify({"email": email}),
+        method: "GET",  
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
@@ -46,6 +46,8 @@ export const getEntries = (email) => {
     })
     fetch(request).then(res => {
         return res.json()
+    }).then(json => {
+        setData(json)
     }).catch(error => {
         console.log(error)
     })
