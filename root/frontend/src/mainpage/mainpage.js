@@ -1,4 +1,5 @@
 import './mainpage.css';
+import Intro from './Intro';
 import title_bg_img from "./resources/titlebg.jpg"
 import TransparentButton from "../components/Buttons/transparentbutton.js"
 import Popup from "../components/Divs/popup.js"
@@ -43,12 +44,11 @@ export default class Mainpage extends Component{
                         <TransparentButton onClick={this.sign_in_handler} text="Sign in"/>
                         <TransparentButton onClick={this.sign_up_handler} text="Create New Account"/>
                     </div>
+                    <Intro />
                 </div>
             </div>
           );
     }
-
-
 }
 
 // function Mainpage() {
