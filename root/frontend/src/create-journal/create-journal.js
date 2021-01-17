@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./create-journal.css";
+import {addEntry} from '../actions/account'
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -7,8 +8,15 @@ import FormControl from "react-bootstrap/FormControl";
 
 function CreateJournal() {
   const [show, setShow] = useState(false);
+
+  const save = () => {
+    addEntry("hi@gmail.com", "Title", "Text")
+    close()
+  }
   const close = () => setShow(false);
   const open = () => setShow(true);
+
+
   return (
     <>
       <Button className="button-spacing" variant="info" onClick={open}>
@@ -46,7 +54,7 @@ function CreateJournal() {
           <Button variant="secondary" onClick={close}>
             Cancel
           </Button>
-          <Button variant="info">Save!</Button>
+          <Button variant="info" onClick={save}>Save!</Button>
         </Modal.Footer>
       </Modal>
     </>

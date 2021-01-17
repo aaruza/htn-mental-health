@@ -85,22 +85,5 @@ def journal_entries():
 
         return str(request.form)
 
-# @app.route('/api/journal', methods=['POST', 'GET'])
-# def journal_entries():
-#     if request.method == 'GET':
-#         values = []
-#         def callback(session):
-#             values =  (session.query(JournalEntry).all())
-#         run_transaction(sessionmaker, callback)
-#         flash('hi')
-#         return str(values)
-#     else:
-#         def callback(session):
-#             entry = JournalEntry(request.form['title'], request.form['text'])
-#             session.add(entry)
-#         run_transaction(sessionmaker, callback)
-
-#         return str(request.form)
-
 if __name__ == '__main__':
     app.run()
