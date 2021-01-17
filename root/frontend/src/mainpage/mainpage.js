@@ -35,8 +35,8 @@ export default class Mainpage extends Component{
     render () {
         return (
             <div className="Mainpage">
-                <Popup visible={this.state.sign_in_visible} onClick={this.sign_in_handler} type="signin"/>
-                <Popup visible={this.state.sign_up_visible} onClick={this.sign_up_handler} type="signup"/>
+                <Popup visible={this.state.sign_in_visible} type="signin"/>
+                <Popup visible={this.state.sign_up_visible} type="signup"/>
                 <div className="Mainpage-title-div">
                     {/* background image */}
                     <img className="Mainpage-bg-img" src={title_bg_img} alt="some text"></img>
