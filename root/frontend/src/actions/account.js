@@ -1,8 +1,7 @@
-export const login = (email) =>{
-    const url = "/api/login"
+export const login = (dashboard) =>{
+    const url = "/api/account"
     const request = new Request(url, {
         method: "GET",
-        body: JSON.stringify({"email": email}),
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
@@ -10,13 +9,13 @@ export const login = (email) =>{
     })
     fetch(request).then(res => {
         return res.json()
-    }).catch(error => {
+    }).then(json => dashboard.setState({accounts: json.values})).catch(error => {
         console.log(error)
     })
 }
 
 
-export const signup = (email, firstname, lastname, password) =>{
+export const accountSignup = (email, firstname, lastname, password) =>{
     const url = "/api/account"
     const request = new Request(url, {
         method: "POST",

@@ -38,11 +38,15 @@ class Account(db.Model):
     firstname = db.Column(db.String)
     lastname = db.Column(db.String)
     password = db.Column(db.String)
+
     def __init__(self, email, firstName, lastName, password):
         self.email = email
         self.firstname = firstName
         self.lastname = lastName
         self.password = password
+
+    def to_dict(self):
+        return json.dumps({"email": self.email, "firstname": self.firstname, "lastname": self.lastname, "password": self.password})
         
 @app.route('/')
 def home():
@@ -54,9 +58,10 @@ def account():
     if request.method == 'GET':
         values = []
         def callback(session):
-            values.extend(session.query(Account).all())
+            temp = session.query(Account).all()
+            values.extend([obj.to_dict() for obj in temp])
         run_transaction(sessionmaker, callback)
-        return str(values)
+        return {'values': values}
     else:
         def callback(session):
             entry = Account(request.get_json()['email'], request.get_json()['firstname'], request.get_json()['lastname'], request.get_json()['password'])
