@@ -41,7 +41,7 @@ export default class Popup extends Component {
     signup() {
         return(
             <div className="Popup-Content">
-                <form className="sign-up">
+                <form className="forms" id="sign-up">
                     <h1>Sign up</h1>
                     <label className='form-label'>Username: </label>
                     <input className='form-text' type="text" id="username"/>
@@ -55,6 +55,7 @@ export default class Popup extends Component {
                     <label className='form-label'>Confirm Password</label>
                     <input className='form-text' type="text" id="password-confirm"/>
                     <br/>
+                    <input type="submit"/>
                 </form>
             </div>
         )
@@ -63,13 +64,15 @@ export default class Popup extends Component {
     signin() {
         return(
             <div className="Popup-Content">
-                <form className="sign-in">
+                <form className="forms" id="sign-in">
                     <h1>Sign In</h1>
                     <label className='form-label'>Email</label>
                     <input className='form-text' type="text" id="email"/>
                     <br/>
                     <label className='form-label'>Password</label>
                     <input className='form-text' type="text" id="password"/>
+                    <br/>
+                    <input type="submit"/>
                 </form>
             </div>
         )
