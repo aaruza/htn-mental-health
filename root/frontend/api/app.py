@@ -1,4 +1,6 @@
-from flask import Flask, request, flash
+from flask import Flask, jsonify, request, flash, render_template
+import json
+from flask_marshmallow import Marshmallow
 import sqlalchemy
 
 from datetime import datetime
@@ -27,6 +29,9 @@ class JournalEntry(db.Model):
         self.text = text
         self.date = datetime.utcnow()
 
+    def to_dict(self):
+        return json.dumps({"id": self.id, "email": self.email, "title": self.title, "text": self.text, "date": str(self.date)})
+
 class Account(db.Model):
     __tablename__ = 'account'
     email = db.Column(db.String, primary_key=True)
@@ -38,6 +43,10 @@ class Account(db.Model):
         self.firstname = firstName
         self.lastname = lastName
         self.password = password
+        
+@app.route('/')
+def home():
+   return render_template('index.html')
 
 #for signup and getting all accounts
 @app.route('/api/account', methods=['POST', 'GET'])
@@ -50,40 +59,38 @@ def account():
         return str(values)
     else:
         def callback(session):
-            entry = Account(request.form['email'], request.form['firstname'], request.form['lastname'], request.form['password'])
+            entry = Account(request.get_json()['email'], request.get_json()['firstname'], request.get_json()['lastname'], request.get_json()['password'])
             session.add(entry)
         run_transaction(sessionmaker, callback)
 
-        return str(request.form)
+        return str(request.get_json())
 
 @app.route('/api/login') #must be a get request to login
 def login():
     user = ""
     def callback(session):
-        user = session.query(Account).filter(request.form['email'] == Account.email and request.form['password'] == Account.password)
+        user = session.query(Account).filter(request.get_json()['email'] == Account.email and request.get_json()['password'] == Account.password)
     if user == "":
         return "User or password is incorrect"
     else:
         return user[0]
 
-@app.route('/api/journal', methods=['POST', 'GET'])
+@app.route('/api/journal', methods=['GET', 'POST'])
 def journal_entries():
     if request.method == 'GET':
         values = []
         def callback(session):
-            if request.form['email'] == '':
-                values.extend(session.query(JournalEntry).all())
-            else:
-                values.extend(session.query(JournalEntry).filter(request.form['email'] == JournalEntry.email))
+            temp = session.query(JournalEntry).all()
+            values.extend([obj.to_dict() for obj in temp])
         run_transaction(sessionmaker, callback)
-        return str(values)
+        return {"hi": 'HI'}
     else:
         def callback(session):
-            entry = JournalEntry(request.form['email'], request.form['title'], request.form['text'])
+            entry = JournalEntry(request.get_json()['email'], request.get_json()['title'], request.get_json()['text'])
             session.add(entry)
         run_transaction(sessionmaker, callback)
 
-        return str(request.form)
+        return str(request.get_json())
 
 if __name__ == '__main__':
     app.run()
